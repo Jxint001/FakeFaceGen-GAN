@@ -1,5 +1,6 @@
 # FakeFaceGen-GAN 报告
-生成的图请看 `Generate_no_opt` 或 `Generate_with_weight` 目录下的。
+生成的图请看 `Generate_no_opt` 或 `Generate_with_weight` 目录下的。  
+
 ## `network.py` 实现过程
 
 - 配环境读 `README` 等必要过程
@@ -49,24 +50,29 @@ end for
 
 我按照这两种优化方向单独/同时进行了优化。
 - 加初始化张量
-- 改用 `SGD optimizer` 训练并把 `lr` 改为 `0.0001`
+- 改用 `SGD optimizer` 训练
 ---
+我发现转化成 pdf 之后图片不是很好处理，可以 webpreview 或者自行看对应图片文件。
 
-**这是原本的收敛图**（生成图片在 `Generate_no_opt` 目录下）
+**这是原本的收敛图**（生成图片在 `Generate_no_opt` 目录下）  
+Loss_no_opt.png  
 ![原本收敛图](Loss_no_opt.png)
 
-**这是仅加初始化张量的收敛图**（生成图片在 `Generate_with_weight` 目录下）
+**这是仅加初始化张量的收敛图**（生成图片在 `Generate_with_weight` 目录下）  
+Loss_with_weight.png  
 ![加初始化张量收敛图](Loss_with_weight.png)
 
 可以看到，判别器的收敛速度和收敛程度基本不变，而生成器的收敛速度不变但收敛程度明显提高。但是这在生成图片的质量上似乎并没有明显体现。
 
 
-**这是仅改用 `SGD optimizer` 训练的收敛图**（生成图片在 `Generate_with_SGD` 目录下）
+**这是仅改用 `SGD optimizer` 训练的收敛图**（生成图片在 `Generate_with_SGD` 目录下） 
+Loss_with_SGD.png   
 ![SGD收敛图](Loss_with_SGD.png)
 
 十分逆天的判别器收敛速度，生成的图像也全是噪声。遗憾离场。推测可能是因为 `SGD` 的收敛速度本身就很慢，训练集不够大；或者学习速度太快.
 
 
-**这是同时有两个改动训练的收敛图**（生成图片在 `Generate_both` 目录下）
+**这是同时有两个改动训练的收敛图**（生成图片在 `Generate_both` 目录下）  
+Loss_both.png  
 ![both收敛图](Loss_both.png)
 并没有改变十分逆天的判别器收敛速度，生成的图像依然是噪声。
