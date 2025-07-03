@@ -52,7 +52,6 @@ end for
 - 加初始化张量
 - 改用 `SGD optimizer` 训练
 ---
-我发现转化成 pdf 之后图片不是很好处理，可以 webpreview 或者自行看对应图片文件。
 
 **这是原本的收敛图**（生成图片在 `Generate_no_opt` 目录下）  
 Loss_no_opt.png  
