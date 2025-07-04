@@ -8,9 +8,9 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 """多线程将图片缩放后再裁切到64*64分辨率"""
 # 裁切图片宽度
-w = 64
+w = 128
 # 裁切图片高度
-h = 64
+h = 128
 # 裁切点横坐标(以图片左上角为原点)
 x = 0
 # 裁切点纵坐标
@@ -33,9 +33,13 @@ def convertjpg(jpgfile, outdir, width=w, height=h):
     img = Image.open(jpgfile)
     (l, h) = img.size
     rate = min(l, h) / width
+    new_w = int(l // rate)
+    new_h = int(h // rate)
+    img = img.resize((new_w, new_h), Image.BILINEAR)
+    left = (new_w - width)  // 2
+    top  = (new_h - height) // 2
+    img = img.crop((left, top, width + left, height + top))
     try:
-        img = img.resize((int(l // rate), int(h // rate)), Image.BILINEAR)
-        img = img.crop((x, y, width + x, height + y))
         img.save(os.path.join(outdir, os.path.basename(jpgfile)))
     except Exception as e:
         print(e)

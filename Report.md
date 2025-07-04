@@ -75,3 +75,13 @@ Loss_with_SGD.png
 Loss_both.png  
 ![both收敛图](Loss_both.png)
 并没有改变十分逆天的判别器收敛速度，生成的图像依然是噪声。
+---
+
+由于前面的额外实现在图片上效果都一般，我又另外执行了以下最终优化：  
+- 增加训练次数，即 `train.py` 中的 `epochs = 25`
+- 增加分辨率，改变了 `preprocess.py` 中的 `w = 128`, `h = 128`，并重新图像居中
+- 加了初始化张量但仍用 `Adam optimizer`
+
+**最终收敛图：**（生成图片在 `Generate_final` 目录下）
+![最终收敛图](Loss_final.png)
+收敛速度和收敛程度均较好。且图像效果显著变好（请查看 `Generate_final` 目录）。
